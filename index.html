@@ -97,7 +97,7 @@
 </section>
 </main>
 <script>
-function speak(text){if(!('speechSynthesis' in window)){alert('ميزة الصوت غير مدعومة في هذا المتصفح. جرّب Chrome أو Edge.');return;}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=0.9;const voices=window.speechSynthesis.getVoices();const v=voices.find(x=>x.lang==='en-US')||voices.find(x=>x.lang.startsWith('en'));if(v)u.voice=v;window.speechSynthesis.speak(u)}
+function speak(text){if(!('speechSynthesis' in window)){alert('ميزة الصوت غير مدعومة في هذا المتصفح. جرّب Chrome أو Edge.');return;}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=0.65;const voices=window.speechSynthesis.getVoices();const v=voices.find(x=>x.lang==='en-US')||voices.find(x=>x.lang.startsWith('en'));if(v)u.voice=v;window.speechSynthesis.speak(u)}
 function toggleTranslations(){document.querySelectorAll('.translation').forEach(x=>x.classList.toggle('show'))}
 function toggleAllTranslations(){const ts=[...document.querySelectorAll('.translation')];const show=ts.some(x=>!x.classList.contains('show'));ts.forEach(x=>x.classList.toggle('show',show))}
 const quizAnswers={};

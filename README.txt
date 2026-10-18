@@ -13,3 +13,5 @@ Important:
 4. The browser's built-in speech synthesis may need internet or installed voices and can vary by device.
 
 Updated version: quiz questions appear one under another; speech rate set to 0.90 (medium, child-friendly pace).
+
+Audio update: default English speech rate is now slower (0.65) for young beginners. Service worker cache version updated to v3-slow.
