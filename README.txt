@@ -15,3 +15,6 @@ Important:
 Updated version: quiz questions appear one under another; speech rate set to 0.90 (medium, child-friendly pace).
 
 Audio update: default English speech rate is now slower (0.65) for young beginners. Service worker cache version updated to v3-slow.
+
+
+Very slow audio update: speech synthesis rate is set to 0.45 for beginner children. Replace index.html and service-worker.js in the GitHub repository, then hard-refresh the site.
