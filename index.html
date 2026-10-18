@@ -49,7 +49,7 @@
   <div class="eyebrow">LESSON 1</div><h2 class="section-title"><span class="n">1</span> Let's learn our sounds <span class="small">لنتعلّم الأصوات</span></h2>
   <p>اضغط على 🔊 للاستماع إلى الكلمة. ركّز على صوت الحرف في بداية التعلّم.</p>
   <div class="sounds">
-    <div class="sound"><div class="letter">s</div><div class="word">sun</div><div class="meaning">شمس</div><button class="btn secondary" onclick="speak('sun')">🔊</button></div>
+    <div class="sound"><div class="letter">s</div><div class="word">Sam</div><div class="meaning">سام</div><button class="btn secondary" onclick="speak('Sam')">🔊</button></div>
     <div class="sound"><div class="letter">a</div><div class="word">ant</div><div class="meaning">نملة</div><button class="btn secondary" onclick="speak('ant')">🔊</button></div>
     <div class="sound"><div class="letter">t</div><div class="word">tap</div><div class="meaning">صنبور</div><button class="btn secondary" onclick="speak('tap')">🔊</button></div>
     <div class="sound"><div class="letter">p</div><div class="word">pan</div><div class="meaning">مقلاة</div><button class="btn secondary" onclick="speak('pan')">🔊</button></div>
@@ -57,7 +57,7 @@
     <div class="sound"><div class="letter">n</div><div class="word">nap</div><div class="meaning">غفوة</div><button class="btn secondary" onclick="speak('nap')">🔊</button></div>
     <div class="sound"><div class="letter">m</div><div class="word">mat</div><div class="meaning">حصيرة</div><button class="btn secondary" onclick="speak('mat')">🔊</button></div>
   </div>
-  <p class="note">ملاحظة للأهل: هذه أمثلة كلمات للتدرّب، وليست كل كلمة دليلًا على صوت الحرف وحده. ساعد الطفل على سماع الصوت ودمجه مع بقية الأصوات.</p>
+  <p class="note">ملاحظة للأهل: كلمة <b>Sam</b> تستخدم أصواتًا تعلّمها الطفل هنا. استمعوا إلى صوت الحرف أولًا، ثم اقرأوا الكلمة كاملة. لا نطلب من الطفل حفظ شكل الكلمة فقط؛ نساعده على دمج الأصوات.</p>
   <div class="footer">My First English Stories · Lesson 1</div>
 </section>
 <section class="page">
@@ -85,8 +85,15 @@
 </section>
 <section class="page">
   <h2 class="section-title"><span class="n">4</span> Quick quiz <span class="small">اختبر نفسك</span></h2>
-  <div class="quiz"><h3 style="text-align:center">Which word uses the sounds s – a – t?</h3><div class="options"><button class="option" onclick="check('sit')">sit</button><button class="option" onclick="check('sat')">sat</button><button class="option" onclick="check('pan')">pan</button></div><div id="feedback" class="feedback" aria-live="polite"></div></div>
-  <h3>Great job! ⭐</h3><p>أحسنت! اقرأ القصة مرة أخرى، واستمع إلى كل جملة، ثم جرّب قراءتها بنفسك.</p>
+  <div class="quiz">
+    <div class="small" style="text-align:center">السؤال <span id="quiz-number">1</span> من 3 · النقاط: <span id="quiz-score">0</span>/3</div>
+    <h3 id="quiz-question" style="text-align:center">Which word uses the sounds s – a – t?</h3>
+    <div class="options" id="quiz-options"><button class="option" onclick="answerQuiz('sit')">sit</button><button class="option" onclick="answerQuiz('sat')">sat</button><button class="option" onclick="answerQuiz('pan')">pan</button></div>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <div style="text-align:center;margin-top:8px"><button id="next-question" class="btn" onclick="nextQuiz()" hidden>Next question →</button><button id="restart-quiz" class="btn secondary" onclick="restartQuiz()" hidden>Try again ↻</button></div>
+  </div>
+  <p id="quiz-finish" style="text-align:center;font-weight:bold" aria-live="polite">أجب عن الأسئلة الثلاثة لتحصل على نتيجتك.</p>
+  <p>بعد الاختبار، اقرأ القصة مرة أخرى، واستمع إلى كل جملة، ثم جرّب قراءتها بنفسك.</p>
   <p class="print-note">للاستخدام الرقمي: استخدم الأزرار للاستماع وإظهار الترجمة. للطباعة: اختر «طباعة / حفظ PDF» من أعلى الصفحة.</p>
   <div class="footer">My First English Stories · Lesson 1</div>
 </section>
@@ -95,7 +102,17 @@
 function speak(text){if(!('speechSynthesis' in window)){alert('ميزة الصوت غير مدعومة في هذا المتصفح. جرّب Chrome أو Edge.');return;}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=0.82;const voices=window.speechSynthesis.getVoices();const v=voices.find(x=>x.lang==='en-US')||voices.find(x=>x.lang.startsWith('en'));if(v)u.voice=v;window.speechSynthesis.speak(u)}
 function toggleTranslations(){document.querySelectorAll('.translation').forEach(x=>x.classList.toggle('show'))}
 function toggleAllTranslations(){const ts=[...document.querySelectorAll('.translation')];const show=ts.some(x=>!x.classList.contains('show'));ts.forEach(x=>x.classList.toggle('show',show))}
-function check(answer){const f=document.getElementById('feedback');if(answer==='sat'){f.textContent='Correct! Well done! 🎉';f.style.color='#237650';speak('Correct! Sat.')}else{f.textContent='Try again. Say each sound: s – a – t.';f.style.color='#a44b67';speak('Try again. S, A, T. Sat.')}}
+const quizItems=[
+ {q:'Which word uses the sounds s – a – t?',options:['sit','sat','pan'],correct:'sat',hint:'s – a – t makes sat.'},
+ {q:'Which word begins with the sound /m/?',options:['pan','mat','sat'],correct:'mat',hint:'mat begins with /m/.'},
+ {q:'Blend the sounds p – a – n.',options:['pin','pan','pat'],correct:'pan',hint:'p – a – n makes pan.'}
+];
+let quizIndex=0,quizScore=0,quizAnswered=false;
+function renderQuiz(){const q=quizItems[quizIndex];document.getElementById('quiz-number').textContent=quizIndex+1;document.getElementById('quiz-question').textContent=q.q;document.getElementById('quiz-score').textContent=quizScore;document.getElementById('feedback').textContent='';document.getElementById('next-question').hidden=true;document.getElementById('restart-quiz').hidden=true;document.getElementById('quiz-finish').textContent='اختر الإجابة الصحيحة. خذ وقتك!';document.getElementById('quiz-options').innerHTML=q.options.map(x=>'<button class="option" onclick="answerQuiz(\''+x+'\')">'+x+'</button>').join('');quizAnswered=false}
+function answerQuiz(answer){if(quizAnswered)return;quizAnswered=true;const q=quizItems[quizIndex],f=document.getElementById('feedback');if(answer===q.correct){quizScore++;f.textContent='Correct! Well done! 🎉 '+q.hint;f.style.color='#237650';speak('Correct! '+q.correct)}else{f.textContent='Not quite. '+q.hint;f.style.color='#a44b67';speak('Try again. '+q.hint)}document.getElementById('quiz-score').textContent=quizScore;document.querySelectorAll('#quiz-options button').forEach(b=>b.disabled=true);if(quizIndex<quizItems.length-1){document.getElementById('next-question').hidden=false}else{document.getElementById('restart-quiz').hidden=false;document.getElementById('quiz-finish').textContent='انتهيت! نتيجتك '+quizScore+' من 3. '+(quizScore===3?'ممتاز! أتقنت الدرس! ⭐':'أحسنت المحاولة! أعد التدريب ثم جرّب مرة أخرى.') }}
+function nextQuiz(){if(quizIndex<quizItems.length-1){quizIndex++;renderQuiz()}}
+function restartQuiz(){quizIndex=0;quizScore=0;renderQuiz()}
+renderQuiz();
 </script>
 <script>
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }
