@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "My First English Stories",
+  "short_name": "First Stories",
+  "description": "Interactive beginner English phonics stories for children.",
+  "lang": "en",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff8ef",
+  "theme_color": "#4b8fe8",
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
